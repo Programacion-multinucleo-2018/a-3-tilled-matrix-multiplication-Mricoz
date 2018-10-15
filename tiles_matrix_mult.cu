@@ -130,7 +130,6 @@ int main(int argc, char **argv){
     std::cout << "Tile size: " << TILE_SIZE << "x" << TILE_SIZE <<'\n';
     std::cout << '\n';
 
-
     // malloc host memory
     float *h_m1, *h_m2, *hostRef, *gpuRef, *gpuRefTiles;
     h_m1 = (float *)malloc(nBytes);
@@ -184,10 +183,11 @@ int main(int argc, char **argv){
 
     // copy kernel result back to host side
     SAFE_CALL(cudaMemcpy(gpuRef, d_MatC, nBytes, cudaMemcpyDeviceToHost), "Error copying d_MatC");
-    if(checkResult(hostRef, gpuRef))
-      printf("MATCH\n\n");
-    else
-      printf("NO MATCH\n\n");
+    if(checkResult(hostRef, gpuRef)){
+        printf("MATCH\n\n");
+    } else {
+         printf("NO MATCH\n\n");
+    }
 
     ////////// GPU with tiles //////////
     start_cpu =  std::chrono::high_resolution_clock::now();
@@ -203,10 +203,11 @@ int main(int argc, char **argv){
 
     // copy kernel result back to host side
     SAFE_CALL(cudaMemcpy(gpuRefTiles, d_MatC, nBytes, cudaMemcpyDeviceToHost), "Error copying d_MatC");
-    if(checkResult(hostRef, gpuRefTiles))
-      printf("MATCH\n\n");
-    else
-      printf("NO MATCH\n\n");
+    if(checkResult(hostRef, gpuRefTiles)){
+        printf("MATCH\n\n");
+    } else {
+        printf("NO MATCH\n\n");    
+    }
 
     // free device global memory
     SAFE_CALL(cudaFree(d_MatA), "Error freeing memory");
