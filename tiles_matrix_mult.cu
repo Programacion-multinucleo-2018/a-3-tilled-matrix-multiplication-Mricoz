@@ -10,7 +10,7 @@
 
 #include "common.h"
 
-#define MATRIX_SIZE 2000 // Matrix size
+#define MATRIX_SIZE 1000 // Matrix size
 #define TILE_SIZE 8 // tiles size
 
 // Fill the matrix
